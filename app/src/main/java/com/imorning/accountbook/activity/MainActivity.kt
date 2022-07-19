@@ -1,7 +1,6 @@
 package com.imorning.accountbook.activity
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import androidx.activity.viewModels
 import androidx.drawerlayout.widget.DrawerLayout
@@ -61,6 +60,7 @@ class MainActivity : BaseActivity() {
         )
         setupActionBarWithNavController(navController, appBarconfigure)
         navView.setupWithNavController(navController)
+        navView.itemIconTintList = null
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

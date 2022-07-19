@@ -16,11 +16,16 @@
             android:id="@+id/nav_disburse"
             android:icon="@mipmap/ic_disburse"
             android:title="@string/label_disburse" />
+        <item
+            android:icon="@mipmap/ic_help"
+            android:title="关于" />
+        <item
+            android:icon="@mipmap/ic_copyright"
+            android:title="版权" />
+        <item
+            android:icon="@mipmap/ic_exit"
+            android:title="退出" />
 
     </group>
 
-    <group android:checkableBehavior="single">
-        <item android:title="关于" />
-        <item android:title="退出" />
-    </group>
 </menu>
