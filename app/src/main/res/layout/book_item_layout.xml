@@ -38,7 +38,7 @@
         android:id="@+id/book_item_balance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="100.0"
+        android:text="1000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
