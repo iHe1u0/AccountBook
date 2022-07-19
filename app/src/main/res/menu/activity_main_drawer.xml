@@ -6,9 +6,21 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
+            android:icon="@mipmap/ic_home"
             android:title="@string/label_home" />
         <item
             android:id="@+id/nav_income"
+            android:icon="@mipmap/ic_income"
             android:title="@string/label_income" />
+        <item
+            android:id="@+id/nav_disburse"
+            android:icon="@mipmap/ic_disburse"
+            android:title="@string/label_disburse" />
+
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item android:title="关于" />
+        <item android:title="退出" />
     </group>
 </menu>

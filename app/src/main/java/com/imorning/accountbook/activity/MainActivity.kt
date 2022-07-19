@@ -56,7 +56,7 @@ class MainActivity : BaseActivity() {
         val navController: NavController = fragment.findNavController()
         appBarconfigure = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_income
+                R.id.nav_home, R.id.nav_income, R.id.nav_disburse
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarconfigure)
@@ -74,7 +74,6 @@ class MainActivity : BaseActivity() {
     }
 
     private suspend fun addNewData() = withContext(Dispatchers.IO) {
-        Log.d(TAG, "addNewData...")
         databaseViewModel.insert(
             Book(
                 id = 0,
