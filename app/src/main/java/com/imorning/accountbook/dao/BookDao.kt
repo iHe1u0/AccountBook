@@ -14,10 +14,7 @@ interface BookDao {
     fun getAll(): Flow<List<Book>>
 
     @Query("SELECT * FROM book WHERE income <> 0.0")
-    fun getAllIncome():Flow<List<Book>>
-
-    @Query("SELECT * FROM book WHERE income <> 0.0")
-    fun getAllx():Flow<List<Book>>
+    fun getAllIncome(): Flow<List<Book>>
 
     @Query("SELECT * FROM book WHERE id IN (:id)")
     fun findByID(id: Int): Flow<List<Book>>
@@ -25,13 +22,18 @@ interface BookDao {
     @Query("SELECT * FROM book WHERE type LIKE :type")
     fun findByType(type: String): Flow<List<Book>>
 
+    @Query("SELECT * FROM book WHERE is_income = 1")
+    fun queryIncome(): Flow<List<Book>>
+
+    @Query("SELECT * FROM book WHERE is_income = 0")
+    fun queryDisburse(): Flow<List<Book>>
 
     @Insert
-    fun insert(book: Book)
+    suspend fun insert(book: Book)
 
     @Delete
-    fun delete(vararg books: Book)
+    suspend fun delete(book: Book)
 
     @Update
-    fun update(vararg books: Book)
+    fun update(book: Book)
 }

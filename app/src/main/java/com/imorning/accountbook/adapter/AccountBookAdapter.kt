@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.imorning.accountbook.R
 import com.imorning.accountbook.databinding.BookItemLayoutBinding
 import com.imorning.accountbook.entity.Book
+import com.imorning.accountbook.utils.Const
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -36,19 +37,22 @@ class AccountBookAdapter(private val onItemClicked: (Book) -> Unit) :
     class BookViewHolder(private var binding: BookItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(book: Book) {
-            if (book.isIncome) {
-                binding.bookItemChange.apply {
-                    text = "+${book.income}"
-                    setTextColor(resources.getColor(R.color.income, resources.newTheme()))
+            when (book.isIncome) {
+                Const.IsIncome.YES.ordinal -> {
+                    binding.bookItemChange.apply {
+                        text = "+${book.income}"
+                        setTextColor(resources.getColor(R.color.income, resources.newTheme()))
+                    }
                 }
-            } else {
-                binding.bookItemChange.apply {
-                    text = "-${book.disburse}"
-                    setTextColor(resources.getColor(R.color.disburse, resources.newTheme()))
+                Const.IsIncome.NO.ordinal -> {
+                    binding.bookItemChange.apply {
+                        text = "-${book.disburse}"
+                        setTextColor(resources.getColor(R.color.disburse, resources.newTheme()))
+                    }
                 }
             }
             binding.bookItemTime.text =
-                SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault()).format(book.time)
+                SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault()).format(book.date)
             binding.bookItemType.text = book.remark
             binding.bookItemBalance.text =
                 "${binding.root.context.getString(R.string.balance)}: ${book.balance}"

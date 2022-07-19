@@ -1,6 +1,7 @@
 package com.imorning.accountbook.ui.income
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,7 @@ import kotlinx.coroutines.launch
 class IncomeFragment : Fragment() {
 
     companion object {
+        private const val TAG = "IncomeFragment"
         fun newInstance() = IncomeFragment()
     }
 
@@ -44,6 +46,13 @@ class IncomeFragment : Fragment() {
         val recyclerView = binding.incomeRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         val accountBookAdapter = AccountBookAdapter {
+            Log.i(TAG, "id is ${it.id}")
+            // databaseViewModel.delete(it)
+            lifecycle.coroutineScope.launch {
+                databaseViewModel.queryIncome().collect { it ->
+                    Log.i(TAG, "all data: $it")
+                }
+            }
 //            val action =IncomeFragmentDirections.navIncomeAction()
 //            view.findNavController().navigate(action)
         }

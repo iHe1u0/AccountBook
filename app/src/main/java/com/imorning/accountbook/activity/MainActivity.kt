@@ -1,5 +1,6 @@
 package com.imorning.accountbook.activity
 
+import android.icu.text.Normalizer.YES
 import android.os.Bundle
 import android.view.Menu
 import androidx.activity.viewModels
@@ -18,12 +19,12 @@ import com.imorning.accountbook.R
 import com.imorning.accountbook.database.BookDatabase
 import com.imorning.accountbook.databinding.ActivityMainBinding
 import com.imorning.accountbook.entity.Book
+import com.imorning.accountbook.utils.Const
 import com.imorning.accountbook.viewmodels.DatabaseViewModel
 import com.imorning.accountbook.viewmodels.DatabaseViewModelFactory
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import java.sql.Date
 
 class MainActivity : BaseActivity() {
 
@@ -43,9 +44,7 @@ class MainActivity : BaseActivity() {
         setSupportActionBar(binding.appBarMain.mainToolbar)
 
         binding.appBarMain.addButton.setOnClickListener {
-            MainScope().launch {
-                addNewData()
-            }
+            addNewData()
         }
 
         val drawerLayout: DrawerLayout = binding.mainDrawerLayout
@@ -73,17 +72,17 @@ class MainActivity : BaseActivity() {
         return navController.navigateUp(appBarconfigure) || super.onSupportNavigateUp()
     }
 
-    private suspend fun addNewData() = withContext(Dispatchers.IO) {
+    private fun addNewData() {
         databaseViewModel.insert(
             Book(
                 id = 0,
-                time = System.currentTimeMillis(),
+                date = Date(System.currentTimeMillis()),
                 income = 100.0,
                 balance = 100.0,
                 disburse = 1.0,
                 type = "测试",
                 remark = "测试标记",
-                isIncome = true
+                isIncome = Const.IsIncome.NO.ordinal
             )
         )
     }

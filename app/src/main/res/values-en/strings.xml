@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Ledger</string>
+    <string name="balance">Balance</string>
+    <string name="des_add_new">Add a new expense or income</string>
+    <string name="label_disburse">Expenditure</string>
+    <string name="label_income">Income</string>
+    <string name="label_home">Overview</string>
+</resources>

@@ -5,6 +5,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.imorning.accountbook.utils.Const
+import java.sql.Date
 
 /**
  * 账本 数据库
@@ -17,8 +18,8 @@ data class Book(
 
     // 时间
     @NonNull
-    @ColumnInfo(name = "time")
-    val time: Long,
+    @ColumnInfo(name = "date")
+    val date: Date,
 
     // 收入
     @ColumnInfo(name = "income")
@@ -34,7 +35,7 @@ data class Book(
 
     // 是否为收入
     @ColumnInfo(name = "is_income")
-    val isIncome: Boolean,
+    val isIncome: Int,
 
     // 类型
     @ColumnInfo(name = "type")
