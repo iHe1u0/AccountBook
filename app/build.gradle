@@ -1,0 +1,86 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
+}
+
+android {
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "com.imorning.accountbook"
+        minSdk 24
+        targetSdk 32
+        versionCode 1
+        versionName "1.0.0"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += [
+                        "room.schemaLocation":"$projectDir/schemas".toString(),
+                        "room.incremental":"true",
+                        "room.expandProjection":"true"]
+            }
+        }
+        
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.2.0-alpha08"
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+    buildFeatures {
+        compose true
+        dataBinding true
+        viewBinding true
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.room:room-runtime:2.4.2'
+    implementation "androidx.room:room-ktx:2.4.2"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
+    kapt "android.arch.persistence.room:compiler:1.1.1"
+    kapt 'androidx.room:room-compiler:2.4.2'
+    // optional - RxJava2 support for Room
+    implementation 'androidx.room:room-rxjava2:2.4.2'
+    // optional - RxJava3 support for Room
+    implementation 'androidx.room:room-rxjava3:2.4.2'
+    // optional - Guava support for Room, including Optional and ListenableFuture
+    implementation 'androidx.room:room-guava:2.4.2'
+    // optional - Test helpers
+    testImplementation 'androidx.room:room-testing:2.4.2'
+    // optional - Paging 3 Integration
+    implementation 'androidx.room:room-paging:2.4.2'
+
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation "androidx.core:core-ktx:1.8.0"
+    implementation "androidx.compose.material3:material3:1.0.0-alpha14"
+    implementation "androidx.compose.material3:material3-window-size-class:1.0.0-alpha14"
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.0'
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.10"
+
+    testImplementation 'junit:junit:4.13.2'
+}
