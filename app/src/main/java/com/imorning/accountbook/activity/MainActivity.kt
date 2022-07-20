@@ -15,9 +15,11 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.imorning.accountbook.App
 import com.imorning.accountbook.R
-import com.imorning.accountbook.database.BookDatabase
 import com.imorning.accountbook.databinding.ActivityMainBinding
+import com.imorning.accountbook.entity.DisburseData
 import com.imorning.accountbook.entity.IncomeData
+import com.imorning.accountbook.ui.disburse.DisburseViewModel
+import com.imorning.accountbook.ui.disburse.DisburseViewModelFactory
 import com.imorning.accountbook.viewmodels.DatabaseViewModel
 import com.imorning.accountbook.viewmodels.DatabaseViewModelFactory
 import java.sql.Date
@@ -25,11 +27,10 @@ import java.sql.Date
 class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var database: BookDatabase
     private lateinit var appBarconfigure: AppBarConfiguration
 
-    private val databaseViewModel: DatabaseViewModel by viewModels {
-        DatabaseViewModelFactory((application as App).database.bookDao())
+    private val databaseViewModel: DisburseViewModel by viewModels {
+        DisburseViewModelFactory((application as App).database.bookDao())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,7 +76,7 @@ class MainActivity : BaseActivity() {
 
     private fun addNewData() {
         databaseViewModel.insert(
-            IncomeData(
+            DisburseData(
                 date = Date(System.currentTimeMillis()),
                 type = "测试",
                 remark = "测试标记",

@@ -3,6 +3,7 @@ package com.imorning.accountbook.viewmodels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.imorning.accountbook.dao.DatabaseDao
+import com.imorning.accountbook.entity.DisburseData
 import com.imorning.accountbook.entity.IncomeData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.runBlocking
@@ -17,7 +18,12 @@ class DatabaseViewModel(private val databaseDao: DatabaseDao) : ViewModel() {
         runBlocking {
             databaseDao.insert(incomeData = incomeData)
         }
+    }
 
+    fun insert(disburseData: DisburseData) {
+        runBlocking {
+            databaseDao.insert(disburseData = disburseData)
+        }
     }
 
     fun delete(incomeData: IncomeData) {
@@ -48,4 +54,5 @@ class DatabaseViewModelFactory(
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
+
 }

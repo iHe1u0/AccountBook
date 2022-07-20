@@ -1,7 +1,6 @@
 package com.imorning.accountbook.ui.income
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.imorning.accountbook.App
 import com.imorning.accountbook.adapter.IncomeAdapter
 import com.imorning.accountbook.databinding.FragmentIncomeBinding
-import com.imorning.accountbook.viewmodels.DatabaseViewModel
-import com.imorning.accountbook.viewmodels.DatabaseViewModelFactory
 import kotlinx.coroutines.launch
 
 class IncomeFragment : Fragment() {
@@ -27,8 +24,8 @@ class IncomeFragment : Fragment() {
 
     private val binding get() = fragmentIncomeBinding!!
 
-    private val databaseViewModel: DatabaseViewModel by activityViewModels {
-        DatabaseViewModelFactory(
+    private val viewModel: IncomeViewModel by activityViewModels {
+        IncomeViewModelFactory(
             (activity?.application as App).database.bookDao()
         )
     }
@@ -46,11 +43,9 @@ class IncomeFragment : Fragment() {
         val recyclerView = binding.incomeRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         val incomeAdapter = IncomeAdapter {
-            Log.i(TAG, "id is ${it.id}")
-            databaseViewModel.delete(it)
+            viewModel.delete(it)
             lifecycle.coroutineScope.launch {
-                databaseViewModel.queryIncome().collect { it ->
-                    Log.i(TAG, "all data: $it")
+                viewModel.queryAll().collect {
                 }
             }
 //            val action =IncomeFragmentDirections.navIncomeAction()
@@ -58,7 +53,7 @@ class IncomeFragment : Fragment() {
         }
         recyclerView.adapter = incomeAdapter
         lifecycle.coroutineScope.launch {
-            databaseViewModel.queryIncome().collect {
+            viewModel.queryAll().collect {
                 incomeAdapter.submitList(it)
             }
         }

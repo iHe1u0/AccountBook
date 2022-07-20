@@ -17,6 +17,9 @@ data class BalanceData(
     @ColumnInfo(name = "value", defaultValue = "0.0")
     val value: Double,
 
+    @ColumnInfo(name = "sum", defaultValue = "0.0")
+    val sum: Double,
+
     // 时间
     @NonNull
     @ColumnInfo(name = "date")

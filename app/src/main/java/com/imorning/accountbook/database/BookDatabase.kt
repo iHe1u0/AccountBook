@@ -14,7 +14,7 @@ import com.imorning.accountbook.utils.Converters
 
 @Database(
     entities = [IncomeData::class, DisburseData::class, BalanceData::class],
-    version = 1
+    version = 2
 )
 @TypeConverters(Converters::class)
 

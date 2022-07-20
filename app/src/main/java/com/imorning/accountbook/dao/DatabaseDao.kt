@@ -2,8 +2,8 @@ package com.imorning.accountbook.dao
 
 import androidx.room.*
 import com.imorning.accountbook.entity.BalanceData
-import com.imorning.accountbook.entity.IncomeData
 import com.imorning.accountbook.entity.DisburseData
+import com.imorning.accountbook.entity.IncomeData
 import kotlinx.coroutines.flow.Flow
 
 //    @Query("SELECT * FROM user WHERE first_name LIKE :first AND " +
@@ -58,6 +58,9 @@ interface DatabaseDao {
 
     @Query("SELECT * FROM balance WHERE type LIKE :type")
     fun queryBalanceByType(type: String): Flow<List<BalanceData>>
+
+    @Query("SELECT sum FROM balance ORDER BY id DESC LIMIT 0,1")
+    suspend fun queryLastBalance(): Double?
 
     @Update
     suspend fun update(incomeData: IncomeData)

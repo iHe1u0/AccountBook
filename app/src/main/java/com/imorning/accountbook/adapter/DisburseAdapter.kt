@@ -6,14 +6,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.imorning.accountbook.databinding.RecordItemLayoutBinding
-import com.imorning.accountbook.entity.IncomeData
+import com.imorning.accountbook.entity.DisburseData
 import com.imorning.accountbook.utils.TimeUtils
 
-class IncomeAdapter(private val onItemClicked: (IncomeData) -> Unit) :
-    ListAdapter<IncomeData, IncomeAdapter.IncomeViewHolder>(DiffCallback) {
+class DisburseAdapter(private val onItemClicked: (DisburseData) -> Unit) :
+    ListAdapter<DisburseData, DisburseAdapter.DisburseViewHolder>(DiffCallback) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IncomeViewHolder {
-        val viewHolder: IncomeViewHolder = IncomeViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DisburseViewHolder {
+        val viewHolder: DisburseViewHolder = DisburseViewHolder(
             RecordItemLayoutBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -28,30 +28,28 @@ class IncomeAdapter(private val onItemClicked: (IncomeData) -> Unit) :
         return viewHolder
     }
 
-    override fun onBindViewHolder(holder: IncomeViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: DisburseViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    class IncomeViewHolder(private var binding: RecordItemLayoutBinding) :
+    class DisburseViewHolder(private var binding: RecordItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(data: IncomeData) {
-            binding.apply {
-                bookItemChange.text = data.value.toString()
-                bookItemTime.text = TimeUtils.dateFormatter(date = data.date)
-                bookItemType.text = data.type
-            }
+        fun bind(data: DisburseData) {
+            binding.bookItemChange.text = data.value.toString()
+            binding.bookItemTime.text = TimeUtils.dateFormatter(date = data.date)
+            binding.bookItemType.text = data.type
         }
-
     }
 
     companion object {
-        private val DiffCallback = object : DiffUtil.ItemCallback<IncomeData>() {
-            override fun areItemsTheSame(oldItem: IncomeData, newItem: IncomeData): Boolean {
+
+        private val DiffCallback = object : DiffUtil.ItemCallback<DisburseData>() {
+            override fun areItemsTheSame(oldItem: DisburseData, newItem: DisburseData): Boolean {
                 return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: IncomeData, newItem: IncomeData): Boolean {
+            override fun areContentsTheSame(oldItem: DisburseData, newItem: DisburseData): Boolean {
                 return oldItem == newItem
             }
         }
