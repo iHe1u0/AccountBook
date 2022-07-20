@@ -10,7 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.coroutineScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.imorning.accountbook.App
-import com.imorning.accountbook.adapter.AccountBookAdapter
+import com.imorning.accountbook.adapter.IncomeAdapter
 import com.imorning.accountbook.databinding.FragmentIncomeBinding
 import com.imorning.accountbook.viewmodels.DatabaseViewModel
 import com.imorning.accountbook.viewmodels.DatabaseViewModelFactory
@@ -45,9 +45,9 @@ class IncomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val recyclerView = binding.incomeRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        val accountBookAdapter = AccountBookAdapter {
+        val incomeAdapter = IncomeAdapter {
             Log.i(TAG, "id is ${it.id}")
-            // databaseViewModel.delete(it)
+            databaseViewModel.delete(it)
             lifecycle.coroutineScope.launch {
                 databaseViewModel.queryIncome().collect { it ->
                     Log.i(TAG, "all data: $it")
@@ -56,10 +56,10 @@ class IncomeFragment : Fragment() {
 //            val action =IncomeFragmentDirections.navIncomeAction()
 //            view.findNavController().navigate(action)
         }
-        recyclerView.adapter = accountBookAdapter
+        recyclerView.adapter = incomeAdapter
         lifecycle.coroutineScope.launch {
-            databaseViewModel.getAll().collect {
-                accountBookAdapter.submitList(it)
+            databaseViewModel.queryIncome().collect {
+                incomeAdapter.submitList(it)
             }
         }
     }

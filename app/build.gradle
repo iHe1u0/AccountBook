@@ -7,10 +7,11 @@ plugins {
 
 android {
     compileSdk 32
+    buildToolsVersion '33.0.0'
 
     defaultConfig {
         applicationId "com.imorning.accountbook"
-        minSdk 24
+        minSdk 23
         targetSdk 32
         versionCode 1
         versionName "1.0.0"
@@ -79,7 +80,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.0'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.0'
     implementation 'com.google.android.material:material:1.6.1'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.10"
 
     testImplementation 'junit:junit:4.13.2'

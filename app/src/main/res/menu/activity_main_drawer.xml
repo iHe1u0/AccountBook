@@ -17,14 +17,17 @@
             android:icon="@mipmap/ic_disburse"
             android:title="@string/label_disburse" />
         <item
+            android:id="@+id/nav_about"
             android:icon="@mipmap/ic_help"
-            android:title="关于" />
+            android:title="@string/label_about" />
         <item
+            android:id="@+id/nav_copyright"
             android:icon="@mipmap/ic_copyright"
-            android:title="版权" />
+            android:title="@string/label_copyright" />
         <item
+            android:id="@+id/nav_exit"
             android:icon="@mipmap/ic_exit"
-            android:title="退出" />
+            android:title="@string/label_exit" />
 
     </group>
 

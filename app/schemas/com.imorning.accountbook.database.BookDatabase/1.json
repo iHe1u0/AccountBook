@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "ba1b13b338ecc4f431f7f28f7ad2b4d4",
+    "identityHash": "0bbbba648d75e88f0c09b0c755624dd4",
     "entities": [
       {
-        "tableName": "book",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `date` INTEGER NOT NULL, `income` REAL NOT NULL, `disburse` REAL NOT NULL, `balance` REAL NOT NULL, `is_income` INTEGER NOT NULL, `type` TEXT NOT NULL, `remark` TEXT)",
+        "tableName": "income",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `value` REAL NOT NULL DEFAULT 0.0, `date` INTEGER NOT NULL, `type` TEXT NOT NULL, `remark` TEXT)",
         "fields": [
           {
             "fieldPath": "id",
@@ -15,32 +15,15 @@
             "notNull": true
           },
           {
+            "fieldPath": "value",
+            "columnName": "value",
+            "affinity": "REAL",
+            "notNull": true,
+            "defaultValue": "0.0"
+          },
+          {
             "fieldPath": "date",
             "columnName": "date",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "income",
-            "columnName": "income",
-            "affinity": "REAL",
-            "notNull": true
-          },
-          {
-            "fieldPath": "disburse",
-            "columnName": "disburse",
-            "affinity": "REAL",
-            "notNull": true
-          },
-          {
-            "fieldPath": "balance",
-            "columnName": "balance",
-            "affinity": "REAL",
-            "notNull": true
-          },
-          {
-            "fieldPath": "isIncome",
-            "columnName": "is_income",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -65,12 +48,96 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "disburse",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `value` REAL NOT NULL DEFAULT 0.0, `date` INTEGER NOT NULL, `type` TEXT NOT NULL, `remark` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "value",
+            "columnName": "value",
+            "affinity": "REAL",
+            "notNull": true,
+            "defaultValue": "0.0"
+          },
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "remark",
+            "columnName": "remark",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "balance",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `value` REAL NOT NULL DEFAULT 0.0, `date` INTEGER NOT NULL, `type` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "value",
+            "columnName": "value",
+            "affinity": "REAL",
+            "notNull": true,
+            "defaultValue": "0.0"
+          },
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ba1b13b338ecc4f431f7f28f7ad2b4d4')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0bbbba648d75e88f0c09b0c755624dd4')"
     ]
   }
 }

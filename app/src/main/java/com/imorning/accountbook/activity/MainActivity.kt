@@ -1,6 +1,5 @@
 package com.imorning.accountbook.activity
 
-import android.icu.text.Normalizer.YES
 import android.os.Bundle
 import android.view.Menu
 import androidx.activity.viewModels
@@ -18,12 +17,9 @@ import com.imorning.accountbook.App
 import com.imorning.accountbook.R
 import com.imorning.accountbook.database.BookDatabase
 import com.imorning.accountbook.databinding.ActivityMainBinding
-import com.imorning.accountbook.entity.Book
-import com.imorning.accountbook.utils.Const
+import com.imorning.accountbook.entity.IncomeData
 import com.imorning.accountbook.viewmodels.DatabaseViewModel
 import com.imorning.accountbook.viewmodels.DatabaseViewModelFactory
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
 import java.sql.Date
 
 class MainActivity : BaseActivity() {
@@ -60,6 +56,11 @@ class MainActivity : BaseActivity() {
         setupActionBarWithNavController(navController, appBarconfigure)
         navView.setupWithNavController(navController)
         navView.itemIconTintList = null
+
+        navView.menu.findItem(R.id.nav_exit).setOnMenuItemClickListener {
+            ActivityCollector.finish()
+            true
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -74,15 +75,11 @@ class MainActivity : BaseActivity() {
 
     private fun addNewData() {
         databaseViewModel.insert(
-            Book(
-                id = 0,
+            IncomeData(
                 date = Date(System.currentTimeMillis()),
-                income = 100.0,
-                balance = 100.0,
-                disburse = 1.0,
                 type = "测试",
                 remark = "测试标记",
-                isIncome = Const.IsIncome.NO.ordinal
+                value = 100.0
             )
         )
     }

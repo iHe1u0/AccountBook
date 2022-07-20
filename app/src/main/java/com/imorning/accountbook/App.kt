@@ -1,6 +1,7 @@
 package com.imorning.accountbook
 
 import android.app.Application
+import android.util.Log
 import com.imorning.accountbook.database.BookDatabase
 
 class App : Application() {
@@ -9,4 +10,5 @@ class App : Application() {
     companion object {
         private const val TAG = "App"
     }
+
 }

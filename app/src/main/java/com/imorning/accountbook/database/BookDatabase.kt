@@ -5,16 +5,22 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.imorning.accountbook.dao.BookDao
-import com.imorning.accountbook.entity.Book
+import com.imorning.accountbook.dao.DatabaseDao
+import com.imorning.accountbook.entity.BalanceData
+import com.imorning.accountbook.entity.DisburseData
+import com.imorning.accountbook.entity.IncomeData
 import com.imorning.accountbook.utils.Const
 import com.imorning.accountbook.utils.Converters
 
-@Database(entities = [Book::class], version = 1)
+@Database(
+    entities = [IncomeData::class, DisburseData::class, BalanceData::class],
+    version = 1
+)
 @TypeConverters(Converters::class)
+
 abstract class BookDatabase : RoomDatabase() {
 
-    abstract fun bookDao(): BookDao
+    abstract fun bookDao(): DatabaseDao
 
     companion object {
         @Volatile

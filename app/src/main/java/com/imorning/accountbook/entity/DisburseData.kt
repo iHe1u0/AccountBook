@@ -7,35 +7,20 @@ import androidx.room.PrimaryKey
 import com.imorning.accountbook.utils.Const
 import java.sql.Date
 
-/**
- * 账本 数据库
- */
-@Entity(tableName = Const.TABLE_NAME)
-data class Book(
+@Entity(tableName = Const.DISBURSE_TABLE_NAME)
+data class DisburseData(
 
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
+
+    @NonNull
+    @ColumnInfo(name = "value", defaultValue = "0.0")
+    val value: Double,
 
     // 时间
     @NonNull
     @ColumnInfo(name = "date")
     val date: Date,
-
-    // 收入
-    @ColumnInfo(name = "income")
-    val income: Double,
-
-    // 支出
-    @ColumnInfo(name = "disburse")
-    val disburse: Double,
-
-    // 余额
-    @ColumnInfo(name = "balance")
-    val balance: Double,
-
-    // 是否为收入
-    @ColumnInfo(name = "is_income")
-    val isIncome: Int,
 
     // 类型
     @ColumnInfo(name = "type")
@@ -43,5 +28,5 @@ data class Book(
 
     // 备注
     @ColumnInfo(name = "remark")
-    val remark: String?
+    val remark: String?,
 )

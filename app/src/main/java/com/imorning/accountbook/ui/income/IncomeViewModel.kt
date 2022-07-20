@@ -1,10 +1,10 @@
 package com.imorning.accountbook.ui.income
 
 import androidx.lifecycle.ViewModel
-import com.imorning.accountbook.dao.BookDao
-import com.imorning.accountbook.entity.Book
+import com.imorning.accountbook.dao.DatabaseDao
+import com.imorning.accountbook.entity.IncomeData
 import kotlinx.coroutines.flow.Flow
 
-class IncomeViewModel(private val bookDao: BookDao) : ViewModel() {
-    fun getAll(): Flow<List<Book>> = bookDao.getAll()
+class IncomeViewModel(private val databaseDao: DatabaseDao) : ViewModel() {
+    fun queryAll(): Flow<List<IncomeData>> = databaseDao.queryAllIncome()
 }

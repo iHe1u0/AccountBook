@@ -2,51 +2,49 @@ package com.imorning.accountbook.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.imorning.accountbook.dao.BookDao
-import com.imorning.accountbook.entity.Book
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainScope
+import com.imorning.accountbook.dao.DatabaseDao
+import com.imorning.accountbook.entity.IncomeData
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.runBlocking
 
-class DatabaseViewModel(private val bookDao: BookDao) : ViewModel() {
+class DatabaseViewModel(private val databaseDao: DatabaseDao) : ViewModel() {
 
-    fun getAll(): Flow<List<Book>> {
-        return bookDao.getAll()
+    fun getAll(): Flow<List<IncomeData>> {
+        TODO("get all data")
     }
 
-    fun queryIncome():Flow<List<Book>>{
-        return bookDao.queryIncome()
+    fun insert(incomeData: IncomeData) {
+        runBlocking {
+            databaseDao.insert(incomeData = incomeData)
+        }
+
     }
 
-    fun insert(book: Book) {
-        MainScope().launch {
-            withContext(Dispatchers.IO) {
-                bookDao.insert(book = book)
-            }
+    fun delete(incomeData: IncomeData) {
+        runBlocking {
+            databaseDao.delete(incomeData = incomeData)
         }
     }
 
-    fun delete(book: Book) {
-        MainScope().launch {
-            withContext(Dispatchers.IO) {
-                bookDao.delete(book = book)
-            }
-        }
+    fun queryIncome(): Flow<List<IncomeData>> {
+        return databaseDao.queryAllIncome()
     }
 
-
+    fun update(incomeData: IncomeData) {
+        runBlocking {
+            databaseDao.update(incomeData = incomeData)
+        }
+    }
 }
 
 class DatabaseViewModelFactory(
-    private val bookDao: BookDao
+    private val databaseDao: DatabaseDao
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(DatabaseViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return DatabaseViewModel(bookDao) as T
+            return DatabaseViewModel(databaseDao) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
