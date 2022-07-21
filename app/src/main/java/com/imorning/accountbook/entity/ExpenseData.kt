@@ -7,8 +7,8 @@ import androidx.room.PrimaryKey
 import com.imorning.accountbook.utils.Const
 import java.sql.Date
 
-@Entity(tableName = Const.DISBURSE_TABLE_NAME)
-data class DisburseData(
+@Entity(tableName = Const.EXPENSE_TABLE_NAME)
+data class ExpenseData(
 
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
@@ -17,16 +17,13 @@ data class DisburseData(
     @ColumnInfo(name = "value", defaultValue = "0.0")
     val value: Double,
 
-    // 时间
     @NonNull
     @ColumnInfo(name = "date")
     val date: Date,
 
-    // 类型
     @ColumnInfo(name = "type")
     val type: String,
 
-    // 备注
     @ColumnInfo(name = "remark")
     val remark: String?,
 )

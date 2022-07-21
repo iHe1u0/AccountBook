@@ -2,13 +2,13 @@ package com.imorning.accountbook.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.imorning.accountbook.dao.DatabaseDao
-import com.imorning.accountbook.entity.DisburseData
+import com.imorning.accountbook.dao.AccountBookDatabaseDao
+import com.imorning.accountbook.entity.ExpenseData
 import com.imorning.accountbook.entity.IncomeData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.runBlocking
 
-class DatabaseViewModel(private val databaseDao: DatabaseDao) : ViewModel() {
+class DatabaseViewModel(private val accountBookDatabaseDao: AccountBookDatabaseDao) : ViewModel() {
 
     fun getAll(): Flow<List<IncomeData>> {
         TODO("get all data")
@@ -16,41 +16,41 @@ class DatabaseViewModel(private val databaseDao: DatabaseDao) : ViewModel() {
 
     fun insert(incomeData: IncomeData) {
         runBlocking {
-            databaseDao.insert(incomeData = incomeData)
+            accountBookDatabaseDao.insert(incomeData = incomeData)
         }
     }
 
-    fun insert(disburseData: DisburseData) {
+    fun insert(expenseData: ExpenseData) {
         runBlocking {
-            databaseDao.insert(disburseData = disburseData)
+            accountBookDatabaseDao.insert(expenseData = expenseData)
         }
     }
 
     fun delete(incomeData: IncomeData) {
         runBlocking {
-            databaseDao.delete(incomeData = incomeData)
+            accountBookDatabaseDao.delete(incomeData = incomeData)
         }
     }
 
     fun queryIncome(): Flow<List<IncomeData>> {
-        return databaseDao.queryAllIncome()
+        return accountBookDatabaseDao.queryAllIncome()
     }
 
     fun update(incomeData: IncomeData) {
         runBlocking {
-            databaseDao.update(incomeData = incomeData)
+            accountBookDatabaseDao.update(incomeData = incomeData)
         }
     }
 }
 
 class DatabaseViewModelFactory(
-    private val databaseDao: DatabaseDao
+    private val accountBookDatabaseDao: AccountBookDatabaseDao
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(DatabaseViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return DatabaseViewModel(databaseDao) as T
+            return DatabaseViewModel(accountBookDatabaseDao) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

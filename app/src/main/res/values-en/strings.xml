@@ -6,4 +6,8 @@
     <string name="label_disburse">Expenditure</string>
     <string name="label_income">Income</string>
     <string name="label_home">Overview</string>
+    <string name="label_about">About</string>
+    <string name="label_copyright">Copyright</string>
+    <string name="label_exit">Exit</string>
+    <string name="label_settings">Settings</string>
 </resources>

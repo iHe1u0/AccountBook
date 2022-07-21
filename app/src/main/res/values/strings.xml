@@ -4,15 +4,11 @@
     <string name="label_income">收入</string>
     <string name="label_disburse">支出</string>
     <string name="balance">余额</string>
-    <string name="des_add_new">添加一笔新的支出或收入</string>
+    <string name="label_settings">设置</string>
     <string name="label_about">关于</string>
     <string name="label_copyright">版权</string>
     <string name="label_exit">退出</string>
 
-    <string-array name="income_type">
-        <item>工资</item>
-        <item>红包</item>
-        <item>出售物品</item>
-        <item>其他</item>
-    </string-array>
+    <string name="des_add_new">添加一笔新的支出或收入</string>
+
 </resources>

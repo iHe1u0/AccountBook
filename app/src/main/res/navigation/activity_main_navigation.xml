@@ -19,9 +19,9 @@
 
     <fragment
         android:id="@+id/nav_disburse"
-        android:name="com.imorning.accountbook.ui.disburse.DisburseFragment"
+        android:name="com.imorning.accountbook.ui.expense.ExpenseFragment"
         android:label="@string/label_disburse"
-        tools:layout="@layout/fragment_disburse" />
+        tools:layout="@layout/fragment_expense" />
 
 
 </navigation>

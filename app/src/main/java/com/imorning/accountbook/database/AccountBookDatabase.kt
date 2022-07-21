@@ -5,34 +5,41 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.imorning.accountbook.dao.DatabaseDao
+import com.imorning.accountbook.dao.AccountBookDatabaseDao
 import com.imorning.accountbook.entity.BalanceData
-import com.imorning.accountbook.entity.DisburseData
+import com.imorning.accountbook.entity.ExpenseData
 import com.imorning.accountbook.entity.IncomeData
 import com.imorning.accountbook.utils.Const
 import com.imorning.accountbook.utils.Converters
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SupportFactory
+
 
 @Database(
-    entities = [IncomeData::class, DisburseData::class, BalanceData::class],
-    version = 2
+    entities = [IncomeData::class, ExpenseData::class, BalanceData::class],
+    version = 3
 )
 @TypeConverters(Converters::class)
 
-abstract class BookDatabase : RoomDatabase() {
+abstract class AccountBookDatabase : RoomDatabase() {
 
-    abstract fun bookDao(): DatabaseDao
+    abstract fun bookDao(): AccountBookDatabaseDao
 
     companion object {
         @Volatile
-        private var INSTANCE: BookDatabase? = null
+        private var INSTANCE: AccountBookDatabase? = null
 
-        fun getDatabase(context: Context): BookDatabase {
+        fun getDatabase(context: Context): AccountBookDatabase {
             return INSTANCE ?: synchronized(this) {
+                val passphrase: ByteArray =
+                    SQLiteDatabase.getBytes("pwd".toCharArray())
+                val factory = SupportFactory(passphrase)
                 val instance = Room.databaseBuilder(
                     context,
-                    BookDatabase::class.java,
+                    AccountBookDatabase::class.java,
                     Const.DATABASE_NAME
                 )
+                    .openHelperFactory(factory)
                     .build()
                 INSTANCE = instance
                 instance

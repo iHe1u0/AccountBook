@@ -17,6 +17,10 @@
             android:icon="@mipmap/ic_disburse"
             android:title="@string/label_disburse" />
         <item
+            android:id="@+id/nav_settings"
+            android:icon="@mipmap/ic_settings"
+            android:title="@string/label_settings" />
+        <item
             android:id="@+id/nav_about"
             android:icon="@mipmap/ic_help"
             android:title="@string/label_about" />

@@ -2,7 +2,7 @@ package com.imorning.accountbook.dao
 
 import androidx.room.*
 import com.imorning.accountbook.entity.BalanceData
-import com.imorning.accountbook.entity.DisburseData
+import com.imorning.accountbook.entity.ExpenseData
 import com.imorning.accountbook.entity.IncomeData
 import kotlinx.coroutines.flow.Flow
 
@@ -10,15 +10,14 @@ import kotlinx.coroutines.flow.Flow
 //           "last_name LIKE :last LIMIT 1")
 //    fun findByName(first: String, last: String): User
 
-
 @Dao
-interface DatabaseDao {
+interface AccountBookDatabaseDao {
 
     @Insert
     suspend fun insert(incomeData: IncomeData)
 
     @Insert
-    suspend fun insert(disburseData: DisburseData)
+    suspend fun insert(expenseData: ExpenseData)
 
     @Insert
     suspend fun insert(balanceData: BalanceData)
@@ -27,7 +26,7 @@ interface DatabaseDao {
     suspend fun delete(incomeData: IncomeData)
 
     @Delete
-    suspend fun delete(disburseData: DisburseData)
+    suspend fun delete(expenseData: ExpenseData)
 
     @Delete
     suspend fun delete(balanceData: BalanceData)
@@ -35,8 +34,8 @@ interface DatabaseDao {
     @Query("SELECT * FROM income")
     fun queryAllIncome(): Flow<List<IncomeData>>
 
-    @Query("SELECT * FROM disburse")
-    fun queryAllDisburse(): Flow<List<DisburseData>>
+    @Query("SELECT * FROM expense")
+    fun queryAllDisburse(): Flow<List<ExpenseData>>
 
     @Query("SELECT * FROM balance")
     fun queryAllBalanceChange(): Flow<List<BalanceData>>
@@ -44,8 +43,8 @@ interface DatabaseDao {
     @Query("SELECT * FROM income WHERE id IN (:id)")
     fun queryIncome(id: Int): Flow<IncomeData>
 
-    @Query("SELECT * FROM disburse WHERE id IN (:id)")
-    fun queryDisburse(id: Int): Flow<DisburseData>
+    @Query("SELECT * FROM expense WHERE id IN (:id)")
+    fun queryDisburse(id: Int): Flow<ExpenseData>
 
     @Query("SELECT * FROM balance WHERE id IN (:id)")
     fun queryBalance(id: Int): Flow<BalanceData>
@@ -53,8 +52,8 @@ interface DatabaseDao {
     @Query("SELECT * FROM income WHERE type LIKE :type")
     fun queryIncomeByType(type: String): Flow<List<IncomeData>>
 
-    @Query("SELECT * FROM disburse WHERE type LIKE :type")
-    fun queryDisburseByType(type: String): Flow<List<DisburseData>>
+    @Query("SELECT * FROM expense WHERE type LIKE :type")
+    fun queryDisburseByType(type: String): Flow<List<ExpenseData>>
 
     @Query("SELECT * FROM balance WHERE type LIKE :type")
     fun queryBalanceByType(type: String): Flow<List<BalanceData>>
@@ -66,7 +65,7 @@ interface DatabaseDao {
     suspend fun update(incomeData: IncomeData)
 
     @Update
-    suspend fun update(disburseData: DisburseData)
+    suspend fun update(expenseData: ExpenseData)
 
     @Update
     suspend fun update(balanceData: BalanceData)

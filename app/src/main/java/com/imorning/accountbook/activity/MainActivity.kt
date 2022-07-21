@@ -1,5 +1,6 @@
 package com.imorning.accountbook.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import androidx.activity.viewModels
@@ -16,21 +17,18 @@ import com.google.android.material.navigation.NavigationView
 import com.imorning.accountbook.App
 import com.imorning.accountbook.R
 import com.imorning.accountbook.databinding.ActivityMainBinding
-import com.imorning.accountbook.entity.DisburseData
 import com.imorning.accountbook.entity.IncomeData
-import com.imorning.accountbook.ui.disburse.DisburseViewModel
-import com.imorning.accountbook.ui.disburse.DisburseViewModelFactory
-import com.imorning.accountbook.viewmodels.DatabaseViewModel
-import com.imorning.accountbook.viewmodels.DatabaseViewModelFactory
+import com.imorning.accountbook.ui.income.IncomeViewModel
+import com.imorning.accountbook.ui.income.IncomeViewModelFactory
 import java.sql.Date
 
 class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var appBarconfigure: AppBarConfiguration
+    private lateinit var appBarConfigure: AppBarConfiguration
 
-    private val databaseViewModel: DisburseViewModel by viewModels {
-        DisburseViewModelFactory((application as App).database.bookDao())
+    private val databaseViewModel: IncomeViewModel by viewModels {
+        IncomeViewModelFactory((application as App).database.bookDao())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +39,10 @@ class MainActivity : BaseActivity() {
         setSupportActionBar(binding.appBarMain.mainToolbar)
 
         binding.appBarMain.addButton.setOnClickListener {
-            addNewData()
+            // DatabaseUtils.changePassword(this, "password", "123")
+            repeat(5) {
+                addNewData()
+            }
         }
 
         val drawerLayout: DrawerLayout = binding.mainDrawerLayout
@@ -49,18 +50,26 @@ class MainActivity : BaseActivity() {
         val fragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main) as Fragment
         val navController: NavController = fragment.findNavController()
-        appBarconfigure = AppBarConfiguration(
+        appBarConfigure = AppBarConfiguration(
             setOf(
                 R.id.nav_home, R.id.nav_income, R.id.nav_disburse
             ), drawerLayout
         )
-        setupActionBarWithNavController(navController, appBarconfigure)
+        setupActionBarWithNavController(navController, appBarConfigure)
         navView.setupWithNavController(navController)
         navView.itemIconTintList = null
 
-        navView.menu.findItem(R.id.nav_exit).setOnMenuItemClickListener {
-            ActivityCollector.finish()
-            true
+        navView.menu.apply {
+            findItem(R.id.nav_settings).setOnMenuItemClickListener {
+                val intent: Intent = Intent(this@MainActivity, MainActivity::class.java).apply {
+                }
+                startActivity(intent)
+                true
+            }
+            findItem(R.id.nav_exit).setOnMenuItemClickListener {
+                ActivityCollector.finish()
+                true
+            }
         }
     }
 
@@ -71,12 +80,12 @@ class MainActivity : BaseActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarconfigure) || super.onSupportNavigateUp()
+        return navController.navigateUp(appBarConfigure) || super.onSupportNavigateUp()
     }
 
     private fun addNewData() {
         databaseViewModel.insert(
-            DisburseData(
+            IncomeData(
                 date = Date(System.currentTimeMillis()),
                 type = "测试",
                 remark = "测试标记",

@@ -1,0 +1,10 @@
+<resources>
+
+    <string-array name="income_type">
+        <item>工资</item>
+        <item>红包</item>
+        <item>出售物品</item>
+        <item>其他</item>
+    </string-array>
+
+</resources>
