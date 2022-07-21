@@ -61,9 +61,9 @@ class MainActivity : BaseActivity() {
 
         navView.menu.apply {
             findItem(R.id.nav_settings).setOnMenuItemClickListener {
-                val intent: Intent = Intent(this@MainActivity, MainActivity::class.java).apply {
-                }
+                val intent: Intent = Intent(this@MainActivity, SettingsActivity::class.java)
                 startActivity(intent)
+                this@MainActivity.finish()
                 true
             }
             findItem(R.id.nav_exit).setOnMenuItemClickListener {

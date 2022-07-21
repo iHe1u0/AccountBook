@@ -12,7 +12,7 @@ android {
     defaultConfig {
         applicationId "com.imorning.accountbook"
         minSdk 23
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0.0"
 
@@ -79,10 +79,22 @@ dependencies {
     // optional - Jetpack Compose integration
     implementation "androidx.paging:paging-compose:1.0.0-alpha15"
 
-    implementation 'androidx.appcompat:appcompat:1.4.2'
-    implementation "androidx.core:core-ktx:1.8.0"
+    // Integration with activities
+    implementation 'androidx.activity:activity-compose:1.5.0'
+    // Compose Material Design
+    implementation 'androidx.compose.material:material:1.1.1'
+    // Animations
+    implementation 'androidx.compose.animation:animation:1.1.1'
+    // Tooling support (Previews, etc.)
+    implementation 'androidx.compose.ui:ui-tooling:1.1.1'
+    // Integration with ViewModels
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.5.0'
+    implementation "androidx.navigation:navigation-compose:2.5.0"
     implementation "androidx.compose.material3:material3:1.0.0-alpha14"
     implementation "androidx.compose.material3:material3-window-size-class:1.0.0-alpha14"
+
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation "androidx.core:core-ktx:1.8.0"
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0'
@@ -90,13 +102,14 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.0'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.10"
+    // implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.10"
     // Sqlcipher
     implementation "net.zetetic:android-database-sqlcipher:4.5.1"
     implementation "androidx.sqlite:sqlite-ktx:2.2.0"
     // Chart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
+    androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.1.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'junit:junit:4.13.2'
     testImplementation "androidx.paging:paging-common-ktx:3.1.1"
