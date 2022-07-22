@@ -1,10 +1,35 @@
 package com.imorning.accountbook.ui.home
 
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 
-class HomeViewModel : ViewModel() {
-    //     private val _text = MutableLiveData<String>().apply {
-    //        value = "This is home Fragment"
-    //    }
-    //    val text: LiveData<String> = _text
+private const val TAG = "HomeViewModel"
+
+class HomeViewModel(private val repository: RecordRepository) : ViewModel() {
+
+//    val incomeCategories: LiveData<List<String>> =
+//        repository.incomeType.asLiveData()
+
+    val incomeValues: LiveData<List<Double>> =
+        repository.incomeValue.asLiveData()
+
+    val incomeCategories: LiveData<List<String>> =
+        repository.incomeType.asLiveData()
+
+    val test: LiveData<String> = Transformations.switchMap(incomeCategories) {
+        MutableLiveData("$incomeCategories")
+    }
+}
+
+class HomeViewModelFactory(
+    private val repository: RecordRepository
+) : ViewModelProvider.Factory {
+
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return HomeViewModel(repository) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
+    }
+
 }

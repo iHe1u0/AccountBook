@@ -13,12 +13,9 @@ import com.imorning.accountbook.adapter.IncomeAdapter
 import com.imorning.accountbook.databinding.FragmentIncomeBinding
 import kotlinx.coroutines.launch
 
-class IncomeFragment : Fragment() {
+private const val TAG = "IncomeFragment"
 
-    companion object {
-        private const val TAG = "IncomeFragment"
-        fun newInstance() = IncomeFragment()
-    }
+class IncomeFragment : Fragment() {
 
     private var fragmentIncomeBinding: FragmentIncomeBinding? = null
 

@@ -61,6 +61,18 @@ interface AccountBookDatabaseDao {
     @Query("SELECT sum FROM balance ORDER BY id DESC LIMIT 0,1")
     suspend fun queryLastBalance(): Double?
 
+    @Query("SELECT type FROM income")
+    fun queryIncomeType(): Flow<List<String>>
+
+    @Query("SELECT type FROM expense")
+    fun queryExpenseType(): Flow<List<String>>
+
+    @Query("SELECT value FROM income")
+    fun queryIncomeValue(): Flow<List<Double>>
+
+    @Query("SELECT value FROM expense")
+    fun queryExpenseValue(): Flow<List<Double>>
+
     @Update
     suspend fun update(incomeData: IncomeData)
 

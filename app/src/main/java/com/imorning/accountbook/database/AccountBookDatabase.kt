@@ -11,6 +11,7 @@ import com.imorning.accountbook.entity.ExpenseData
 import com.imorning.accountbook.entity.IncomeData
 import com.imorning.accountbook.utils.Const
 import com.imorning.accountbook.utils.Converters
+import kotlinx.coroutines.CoroutineScope
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
 
@@ -29,7 +30,7 @@ abstract class AccountBookDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: AccountBookDatabase? = null
 
-        fun getDatabase(context: Context): AccountBookDatabase {
+        fun getDatabase(context: Context, scope: CoroutineScope): AccountBookDatabase {
             return INSTANCE ?: synchronized(this) {
                 val passphrase: ByteArray =
                     SQLiteDatabase.getBytes("pwd".toCharArray())
