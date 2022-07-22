@@ -107,7 +107,8 @@ dependencies {
     implementation "net.zetetic:android-database-sqlcipher:4.5.1"
     implementation "androidx.sqlite:sqlite-ktx:2.2.0"
     // Chart
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    // implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation 'com.github.STRAIBERRY-AI-INC:Straiberry-charts:1.1.0'
 
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.1.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

@@ -24,13 +24,12 @@ class HomeFragment : Fragment() {
         viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
 
         fragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
 //        val textView: TextView = fragmentHomeBinding.textHome
 //        homeViewModel.text.observe(viewLifecycleOwner) {
 //            textView.text = it
 //        }
-        return root
+        return binding.root
     }
 
     override fun onDestroyView() {

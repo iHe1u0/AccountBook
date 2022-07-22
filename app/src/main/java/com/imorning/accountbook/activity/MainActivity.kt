@@ -63,7 +63,7 @@ class MainActivity : BaseActivity() {
             findItem(R.id.nav_settings).setOnMenuItemClickListener {
                 val intent: Intent = Intent(this@MainActivity, SettingsActivity::class.java)
                 startActivity(intent)
-                this@MainActivity.finish()
+                // this@MainActivity.finish()
                 true
             }
             findItem(R.id.nav_exit).setOnMenuItemClickListener {
