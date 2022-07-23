@@ -1,11 +1,9 @@
 package com.imorning.accountbook.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -13,8 +11,8 @@ import androidx.lifecycle.Observer
 import com.imorning.accountbook.App
 import com.imorning.accountbook.R
 import com.imorning.accountbook.databinding.FragmentHomeBinding
+import com.imorning.accountbook.view.ContentScreen
 import com.imorning.accountbook.view.OverviewTheme
-import com.imorning.accountbook.view.PieChartView
 
 private const val TAG = "HomeFragment"
 
@@ -30,7 +28,6 @@ class HomeFragment : Fragment() {
         )
     }
 
-    @OptIn(ExperimentalComposeUiApi::class)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,39 +35,24 @@ class HomeFragment : Fragment() {
     ): View {
         fragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        var values = listOf(1.0, 2.0, 3.0, 4.0)
+        var values:List<Double> = listOf(1.0, 2.0, 3.0, 4.0)
         var categories = resources.getStringArray(R.array.income_type).asList()
 
-//        viewModel.incomeCategories.observe(viewLifecycleOwner, Observer { income_categories ->
-//            income_categories.let {
-//                categories = it
-//            }
-//        })
-
-        viewModel.incomeValues.observe(viewLifecycleOwner, Observer { income_values ->
+        viewModel.incomeValues.observe(viewLifecycleOwner) { income_values ->
             income_values.let {
-                Log.i(TAG, "onCreateView: data changed... $it")
                 values = it
-            }
-        })
-
-        val view = ComposeView(requireContext()).apply {
-            setContent {
-                OverviewTheme {
-                    PieChartView(viewModel)
-                }
             }
         }
 
+        val view = inflater.inflate(R.layout.fragment_home, container, false).apply {
+            findViewById<ComposeView>(R.id.home_compose_view).setContent {
+                OverviewTheme {
+                    ContentScreen(viewModel)
+                }
+            }
+        }
         return view
-//        fragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false)
-////        val textView: TextView = fragmentHomeBinding.textHome
-////        homeViewModel.text.observe(viewLifecycleOwner) {
-////            textView.text = it
-////        }
-//        return binding.root
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

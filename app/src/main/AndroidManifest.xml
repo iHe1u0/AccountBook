@@ -23,9 +23,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.SettingsActivity"
-            android:exported="false"
-            android:label="@string/label_settings"/>
+            android:name=".activity.PrimaryActivity"
+            android:exported="true"
+            android:label="@string/label_settings">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
     </application>
 
