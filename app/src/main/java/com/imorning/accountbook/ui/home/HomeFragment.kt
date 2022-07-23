@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import com.imorning.accountbook.App
 import com.imorning.accountbook.R
 import com.imorning.accountbook.databinding.FragmentHomeBinding
@@ -35,12 +34,18 @@ class HomeFragment : Fragment() {
     ): View {
         fragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        var values:List<Double> = listOf(1.0, 2.0, 3.0, 4.0)
-        var categories = resources.getStringArray(R.array.income_type).asList()
+        var incomeValues: List<Double> = listOf(1.0, 2.0, 3.0, 4.0)
+        var incomeCategories = resources.getStringArray(R.array.income_type).asList()
 
         viewModel.incomeValues.observe(viewLifecycleOwner) { income_values ->
             income_values.let {
-                values = it
+                incomeValues = it
+            }
+        }
+
+        viewModel.incomeCategories.observe(viewLifecycleOwner) { income_Categories ->
+            income_Categories.let {
+                incomeCategories = it
             }
         }
 

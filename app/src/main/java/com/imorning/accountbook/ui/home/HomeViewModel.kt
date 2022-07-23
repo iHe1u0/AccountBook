@@ -6,18 +6,18 @@ private const val TAG = "HomeViewModel"
 
 class HomeViewModel(private val repository: RecordRepository) : ViewModel() {
 
-//    val incomeCategories: LiveData<List<String>> =
-//        repository.incomeType.asLiveData()
-
     val incomeValues: LiveData<List<Double>> =
         repository.incomeValue.asLiveData()
 
     val incomeCategories: LiveData<List<String>> =
         repository.incomeType.asLiveData()
 
-    val test: LiveData<String> = Transformations.switchMap(incomeCategories) {
-        MutableLiveData("$incomeCategories")
-    }
+    val expenseValues: LiveData<List<Double>> =
+        repository.incomeValue.asLiveData()
+
+    val expenseCategories: LiveData<List<String>> =
+        repository.incomeType.asLiveData()
+
 }
 
 class HomeViewModelFactory(

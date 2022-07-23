@@ -21,6 +21,7 @@ import com.imorning.accountbook.entity.IncomeData
 import com.imorning.accountbook.ui.income.IncomeViewModel
 import com.imorning.accountbook.ui.income.IncomeViewModelFactory
 import java.sql.Date
+import kotlin.random.Random
 
 class MainActivity : BaseActivity() {
 
@@ -40,7 +41,7 @@ class MainActivity : BaseActivity() {
 
         binding.appBarMain.addButton.setOnClickListener {
             // DatabaseUtils.changePassword(this, "password", "123")
-            repeat(5) {
+            repeat(3) {
                 addNewData()
             }
         }
@@ -87,7 +88,7 @@ class MainActivity : BaseActivity() {
         databaseViewModel.insert(
             IncomeData(
                 date = Date(System.currentTimeMillis()),
-                type = "测试",
+                type = "测试-${Random(1000).nextDouble()}",
                 remark = "测试标记",
                 value = 100.0
             )

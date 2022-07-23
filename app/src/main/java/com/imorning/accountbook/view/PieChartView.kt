@@ -29,7 +29,8 @@ import hu.ma.charts.legend.data.LegendPosition
 import hu.ma.charts.pie.PieChart
 import hu.ma.charts.pie.data.PieChartData
 import hu.ma.charts.pie.data.PieChartEntry
-import kotlin.math.roundToInt
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 
 @Composable
@@ -58,7 +59,7 @@ fun ContentScreen(categories: List<String>, values: List<Double>) {
         legendPosition = LegendPosition.Bottom
     )
     ScreenContainer {
-        item() {
+        item {
             ChartContainer(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -166,7 +167,9 @@ fun buildValuePercentString(item: LegendEntry) = buildAnnotatedString {
         style = MaterialTheme.typography.caption.toSpanStyle()
             .copy(color = MaterialTheme.colors.secondary)
     ) {
-        val percentString = item.percent.roundToInt().toString()
+        val format = DecimalFormat("0.##")
+        format.roundingMode = RoundingMode.FLOOR
+        val percentString = format.format(item.percent).toString()
         append("($percentString %)")
     }
 }
