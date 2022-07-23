@@ -34,22 +34,8 @@ class HomeFragment : Fragment() {
     ): View {
         fragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        var incomeValues: List<Double> = listOf(1.0, 2.0, 3.0, 4.0)
-        var incomeCategories = resources.getStringArray(R.array.income_type).asList()
-
-        var hashMap: HashMap<String, Double> = HashMap()
-
-        viewModel.incomeValues.observe(viewLifecycleOwner) { income_values ->
-            income_values.let {
-                incomeValues = it
-            }
-        }
-
-        viewModel.incomeCategories.observe(viewLifecycleOwner) { income_Categories ->
-            income_Categories.let {
-                incomeCategories = it
-            }
-        }
+        // viewModel.incomeLists.observe(viewLifecycleOwner) {
+        // }
 
         val view = inflater.inflate(R.layout.fragment_home, container, false).apply {
             findViewById<ComposeView>(R.id.home_compose_view).setContent {

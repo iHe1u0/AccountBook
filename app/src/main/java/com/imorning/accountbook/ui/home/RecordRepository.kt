@@ -1,6 +1,5 @@
 package com.imorning.accountbook.ui.home
 
-import androidx.lifecycle.asLiveData
 import com.imorning.accountbook.dao.AccountBookDatabaseDao
 import com.imorning.accountbook.entity.ExpenseRecordEntity
 import com.imorning.accountbook.entity.IncomeRecordEntity
@@ -15,6 +14,8 @@ class RecordRepository(private val databaseDao: AccountBookDatabaseDao) {
     val expenseType: Flow<List<String>> = databaseDao.queryExpenseType()
 
     val expenseValue: Flow<List<Double>> = databaseDao.queryExpenseValue()
+
+    val incomeLists: Flow<List<IncomeRecordEntity>> = databaseDao.queryAllIncome()
 
 }
 
@@ -64,16 +65,6 @@ class HomeRecordHelper(
 
 
 }
-
-class IncomeRecord(
-    val category: String,
-    val value: Double
-) : BaseRecord(category, value)
-
-class ExpenseRecord(
-    val category: String,
-    val value: Double
-) : BaseRecord(category, value)
 
 open class BaseRecord(
     val _category: String,

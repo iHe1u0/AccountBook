@@ -1,5 +1,6 @@
 package com.imorning.accountbook.view
 
+import android.util.Log
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -32,14 +33,69 @@ import hu.ma.charts.pie.data.PieChartEntry
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
+private const val TAG = "PieChartView"
 
 @Composable
 fun ContentScreen(viewModel: HomeViewModel = viewModel()) {
-    val categories = viewModel.incomeCategories.observeAsState()
-    val value = viewModel.incomeValues.observeAsState()
-    categories.value?.let { listCategory ->
-        value.value?.let { listValue ->
-            ContentScreen(categories = listCategory, values = listValue)
+
+    val incomeLists = viewModel.incomeLists.observeAsState()
+    val items = incomeLists.value ?: return
+    val incomes: HashMap<String, Double> = HashMap()
+    items.map { item ->
+        val category = item.type
+        val value = item.value
+        if (incomes.contains(category)) {
+            val sumResult = value + incomes[category]!!
+            incomes[category] = sumResult
+        } else {
+            incomes.put(category, value)
+        }
+    }
+    ContentScreen(incomes)
+}
+
+
+@Composable
+fun ContentScreen(lists: HashMap<String, Double>) {
+
+    val pieChartData = lists.map { item ->
+        Log.i(TAG, "item is $item")
+        PieChartEntry(
+            value = item.value.toFloat(),
+            label = AnnotatedString(item.key)
+        )
+    }.let {
+        PieChartData(
+            entries = it,
+            colors = Colors.SimpleColorsLight,
+            legendShape = CircleShape,
+            legendPosition = LegendPosition.Bottom
+        )
+    }
+    ScreenContainer {
+        repeat(3) {
+            item {
+                ChartContainer(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp)
+                        .border(
+                            BorderStroke(1.dp, Color.LightGray),
+                            shape = RoundedCornerShape(16.dp)
+                        )
+                        .padding(16.dp)
+                        .animateContentSize(),
+                    title = "测试"
+                ) {
+                    PieChart(
+                        data = pieChartData,
+                        legend = { entries ->
+                            CustomVerticalLegend(entries = entries)
+                        }
+                    )
+                }
+
+            }
         }
     }
 }
@@ -48,10 +104,10 @@ fun ContentScreen(viewModel: HomeViewModel = viewModel()) {
 fun ContentScreen(categories: List<String>, values: List<Double>) {
 
     val pieChartData = PieChartData(
-        entries = values.mapIndexed { idx, value ->
+        entries = values.mapIndexed { index, value ->
             PieChartEntry(
                 value = value.toFloat(),
-                label = AnnotatedString(categories[idx])
+                label = AnnotatedString(categories[index])
             )
         },
         colors = Colors.SimpleColorsLight,
@@ -60,26 +116,27 @@ fun ContentScreen(categories: List<String>, values: List<Double>) {
     )
     ScreenContainer {
         item {
-            ChartContainer(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-                    .border(
-                        BorderStroke(1.dp, Color.LightGray),
-                        shape = RoundedCornerShape(16.dp)
+            repeat(2) {
+                ChartContainer(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp)
+                        .border(
+                            BorderStroke(1.dp, Color.LightGray),
+                            shape = RoundedCornerShape(16.dp)
+                        )
+                        .padding(16.dp)
+                        .animateContentSize(),
+                    title = "测试"
+                ) {
+                    PieChart(
+                        data = pieChartData,
+                        legend = { entries ->
+                            CustomVerticalLegend(entries = entries)
+                        }
                     )
-                    .padding(16.dp)
-                    .animateContentSize(),
-                title = "测试"
-            ) {
-                PieChart(
-                    data = pieChartData,
-                    legend = { entries ->
-                        CustomVerticalLegend(entries = entries)
-                    }
-                )
+                }
             }
-
         }
     }
 }

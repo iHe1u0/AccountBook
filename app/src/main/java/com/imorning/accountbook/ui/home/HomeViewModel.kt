@@ -1,23 +1,16 @@
 package com.imorning.accountbook.ui.home
 
 import androidx.lifecycle.*
+import com.imorning.accountbook.entity.BalanceRecordEntity
+import com.imorning.accountbook.entity.ExpenseRecordEntity
+import com.imorning.accountbook.entity.IncomeRecordEntity
 
 private const val TAG = "HomeViewModel"
 
 class HomeViewModel(private val repository: RecordRepository) : ViewModel() {
 
-    val incomeValues: LiveData<List<Double>> =
-        repository.incomeValue.asLiveData()
-
-    val incomeCategories: LiveData<List<String>> =
-        repository.incomeType.asLiveData()
-
-    val expenseValues: LiveData<List<Double>> =
-        repository.expenseValue.asLiveData()
-
-    val expenseCategories: LiveData<List<String>> =
-        repository.expenseType.asLiveData()
-
+    val incomeLists:LiveData<List<IncomeRecordEntity>> =
+        repository.incomeLists.asLiveData()
 }
 
 class HomeViewModelFactory(
@@ -33,3 +26,9 @@ class HomeViewModelFactory(
     }
 
 }
+
+class Records(
+    public val incomeRecords: List<IncomeRecordEntity>,
+    public val expenseRecords: List<ExpenseRecordEntity>,
+    public val balanceRecords: List<BalanceRecordEntity>,
+)

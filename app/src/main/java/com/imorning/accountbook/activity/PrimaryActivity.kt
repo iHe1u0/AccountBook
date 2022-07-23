@@ -1,7 +1,6 @@
 package com.imorning.accountbook.activity
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.BorderStroke
@@ -23,6 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.imorning.accountbook.view.Colors
@@ -51,6 +51,13 @@ class PrimaryActivity : BaseActivity() {
 
 }
 
+@Preview
+@Composable
+fun MyScreen() {
+    val categories: List<String> = listOf("A", "B", "C", "B", "C")
+    val values: List<Double> = listOf(100.0, 200.0, 300.0, 800.0)
+    ContentScreen(categories = categories, values = values)
+}
 
 @Composable
 fun ContentScreen(categories: List<String>, values: List<Double>) {

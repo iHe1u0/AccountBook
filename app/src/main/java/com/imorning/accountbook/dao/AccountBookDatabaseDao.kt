@@ -4,6 +4,7 @@ import androidx.room.*
 import com.imorning.accountbook.entity.BalanceRecordEntity
 import com.imorning.accountbook.entity.ExpenseRecordEntity
 import com.imorning.accountbook.entity.IncomeRecordEntity
+import com.imorning.accountbook.ui.home.Records
 import kotlinx.coroutines.flow.Flow
 
 //    @Query("SELECT * FROM user WHERE first_name LIKE :first AND " +
@@ -81,4 +82,5 @@ interface AccountBookDatabaseDao {
 
     @Update
     suspend fun update(balanceRecordEntity: BalanceRecordEntity)
+
 }
