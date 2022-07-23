@@ -13,10 +13,10 @@ class HomeViewModel(private val repository: RecordRepository) : ViewModel() {
         repository.incomeType.asLiveData()
 
     val expenseValues: LiveData<List<Double>> =
-        repository.incomeValue.asLiveData()
+        repository.expenseValue.asLiveData()
 
     val expenseCategories: LiveData<List<String>> =
-        repository.incomeType.asLiveData()
+        repository.expenseType.asLiveData()
 
 }
 

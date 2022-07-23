@@ -8,7 +8,7 @@ import com.imorning.accountbook.utils.Const
 import java.sql.Date
 
 @Entity(tableName = Const.BALANCE_TABLE_NAME)
-data class BalanceData(
+data class BalanceRecordEntity(
 
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,

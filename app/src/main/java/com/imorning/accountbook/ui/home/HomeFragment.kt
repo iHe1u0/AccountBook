@@ -37,6 +37,8 @@ class HomeFragment : Fragment() {
         var incomeValues: List<Double> = listOf(1.0, 2.0, 3.0, 4.0)
         var incomeCategories = resources.getStringArray(R.array.income_type).asList()
 
+        var hashMap: HashMap<String, Double> = HashMap()
+
         viewModel.incomeValues.observe(viewLifecycleOwner) { income_values ->
             income_values.let {
                 incomeValues = it

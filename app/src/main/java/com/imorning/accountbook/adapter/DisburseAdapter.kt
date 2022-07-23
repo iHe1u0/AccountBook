@@ -6,11 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.imorning.accountbook.databinding.RecordItemLayoutBinding
-import com.imorning.accountbook.entity.ExpenseData
+import com.imorning.accountbook.entity.ExpenseRecordEntity
 import com.imorning.accountbook.utils.TimeUtils
 
-class DisburseAdapter(private val onItemClicked: (ExpenseData) -> Unit) :
-    ListAdapter<ExpenseData, DisburseAdapter.DisburseViewHolder>(DiffCallback) {
+class DisburseAdapter(private val onItemClicked: (ExpenseRecordEntity) -> Unit) :
+    ListAdapter<ExpenseRecordEntity, DisburseAdapter.DisburseViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DisburseViewHolder {
         val viewHolder: DisburseViewHolder = DisburseViewHolder(
@@ -35,7 +35,7 @@ class DisburseAdapter(private val onItemClicked: (ExpenseData) -> Unit) :
     class DisburseViewHolder(private var binding: RecordItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(data: ExpenseData) {
+        fun bind(data: ExpenseRecordEntity) {
             binding.bookItemChange.text = data.value.toString()
             binding.bookItemTime.text = TimeUtils.dateFormatter(date = data.date)
             binding.bookItemType.text = data.type
@@ -44,12 +44,12 @@ class DisburseAdapter(private val onItemClicked: (ExpenseData) -> Unit) :
 
     companion object {
 
-        private val DiffCallback = object : DiffUtil.ItemCallback<ExpenseData>() {
-            override fun areItemsTheSame(oldItem: ExpenseData, newItem: ExpenseData): Boolean {
+        private val DiffCallback = object : DiffUtil.ItemCallback<ExpenseRecordEntity>() {
+            override fun areItemsTheSame(oldItem: ExpenseRecordEntity, newItem: ExpenseRecordEntity): Boolean {
                 return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: ExpenseData, newItem: ExpenseData): Boolean {
+            override fun areContentsTheSame(oldItem: ExpenseRecordEntity, newItem: ExpenseRecordEntity): Boolean {
                 return oldItem == newItem
             }
         }

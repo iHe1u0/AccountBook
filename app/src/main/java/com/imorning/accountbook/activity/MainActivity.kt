@@ -17,7 +17,7 @@ import com.google.android.material.navigation.NavigationView
 import com.imorning.accountbook.App
 import com.imorning.accountbook.R
 import com.imorning.accountbook.databinding.ActivityMainBinding
-import com.imorning.accountbook.entity.IncomeData
+import com.imorning.accountbook.entity.IncomeRecordEntity
 import com.imorning.accountbook.ui.income.IncomeViewModel
 import com.imorning.accountbook.ui.income.IncomeViewModelFactory
 import java.sql.Date
@@ -86,7 +86,7 @@ class MainActivity : BaseActivity() {
 
     private fun addNewData() {
         databaseViewModel.insert(
-            IncomeData(
+            IncomeRecordEntity(
                 date = Date(System.currentTimeMillis()),
                 type = "测试-${Random(1000).nextDouble()}",
                 remark = "测试标记",

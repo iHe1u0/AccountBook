@@ -8,7 +8,7 @@ import com.imorning.accountbook.utils.Const
 import java.sql.Date
 
 @Entity(tableName = Const.INCOME_TABLE_NAME)
-data class IncomeData(
+data class IncomeRecordEntity(
 
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,

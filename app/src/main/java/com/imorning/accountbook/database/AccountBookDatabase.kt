@@ -6,9 +6,9 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.imorning.accountbook.dao.AccountBookDatabaseDao
-import com.imorning.accountbook.entity.BalanceData
-import com.imorning.accountbook.entity.ExpenseData
-import com.imorning.accountbook.entity.IncomeData
+import com.imorning.accountbook.entity.BalanceRecordEntity
+import com.imorning.accountbook.entity.ExpenseRecordEntity
+import com.imorning.accountbook.entity.IncomeRecordEntity
 import com.imorning.accountbook.utils.Const
 import com.imorning.accountbook.utils.Converters
 import kotlinx.coroutines.CoroutineScope
@@ -17,7 +17,7 @@ import net.sqlcipher.database.SupportFactory
 
 
 @Database(
-    entities = [IncomeData::class, ExpenseData::class, BalanceData::class],
+    entities = [IncomeRecordEntity::class, ExpenseRecordEntity::class, BalanceRecordEntity::class],
     version = 3
 )
 @TypeConverters(Converters::class)

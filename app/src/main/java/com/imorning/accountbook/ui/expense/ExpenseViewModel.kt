@@ -3,44 +3,44 @@ package com.imorning.accountbook.ui.expense
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.imorning.accountbook.dao.AccountBookDatabaseDao
-import com.imorning.accountbook.entity.BalanceData
-import com.imorning.accountbook.entity.ExpenseData
+import com.imorning.accountbook.entity.BalanceRecordEntity
+import com.imorning.accountbook.entity.ExpenseRecordEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.runBlocking
 
 class ExpenseViewModel(private val accountBookDatabaseDao: AccountBookDatabaseDao) : ViewModel() {
 
-    fun insert(expenseData: ExpenseData) {
+    fun insert(expenseRecordEntity: ExpenseRecordEntity) {
         runBlocking {
             var oldSum: Double? = accountBookDatabaseDao.queryLastBalance()
             if (oldSum == null) {
                 oldSum = 0.0
             }
-            val balanceData = BalanceData(
+            val balanceRecordEntity = BalanceRecordEntity(
                 id = 0,
-                date = expenseData.date,
-                value = expenseData.value,
-                type = expenseData.type,
-                sum = oldSum - expenseData.value
+                date = expenseRecordEntity.date,
+                value = expenseRecordEntity.value,
+                type = expenseRecordEntity.type,
+                sum = oldSum - expenseRecordEntity.value
             )
-            accountBookDatabaseDao.insert(expenseData = expenseData)
-            accountBookDatabaseDao.insert(balanceData = balanceData)
+            accountBookDatabaseDao.insert(expenseRecordEntity = expenseRecordEntity)
+            accountBookDatabaseDao.insert(balanceRecordEntity = balanceRecordEntity)
         }
     }
 
-    fun delete(expenseData: ExpenseData) {
+    fun delete(expenseRecordEntity: ExpenseRecordEntity) {
         runBlocking {
-            accountBookDatabaseDao.delete(expenseData = expenseData)
+            accountBookDatabaseDao.delete(expenseRecordEntity = expenseRecordEntity)
         }
     }
 
-    fun queryAll(): Flow<List<ExpenseData>> {
+    fun queryAll(): Flow<List<ExpenseRecordEntity>> {
         return accountBookDatabaseDao.queryAllDisburse()
     }
 
-    fun update(expenseData: ExpenseData) {
+    fun update(expenseRecordEntity: ExpenseRecordEntity) {
         runBlocking {
-            accountBookDatabaseDao.update(expenseData = expenseData)
+            accountBookDatabaseDao.update(expenseRecordEntity = expenseRecordEntity)
         }
     }
 

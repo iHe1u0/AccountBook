@@ -6,11 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.imorning.accountbook.databinding.RecordItemLayoutBinding
-import com.imorning.accountbook.entity.IncomeData
+import com.imorning.accountbook.entity.IncomeRecordEntity
 import com.imorning.accountbook.utils.TimeUtils
 
-class IncomeAdapter(private val onItemClicked: (IncomeData) -> Unit) :
-    ListAdapter<IncomeData, IncomeAdapter.IncomeViewHolder>(DiffCallback) {
+class IncomeAdapter(private val onItemClicked: (IncomeRecordEntity) -> Unit) :
+    ListAdapter<IncomeRecordEntity, IncomeAdapter.IncomeViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IncomeViewHolder {
         val viewHolder: IncomeViewHolder = IncomeViewHolder(
@@ -35,7 +35,7 @@ class IncomeAdapter(private val onItemClicked: (IncomeData) -> Unit) :
     class IncomeViewHolder(private var binding: RecordItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(data: IncomeData) {
+        fun bind(data: IncomeRecordEntity) {
             binding.apply {
                 bookItemChange.text = data.value.toString()
                 bookItemTime.text = TimeUtils.dateFormatter(date = data.date)
@@ -46,12 +46,12 @@ class IncomeAdapter(private val onItemClicked: (IncomeData) -> Unit) :
     }
 
     companion object {
-        private val DiffCallback = object : DiffUtil.ItemCallback<IncomeData>() {
-            override fun areItemsTheSame(oldItem: IncomeData, newItem: IncomeData): Boolean {
+        private val DiffCallback = object : DiffUtil.ItemCallback<IncomeRecordEntity>() {
+            override fun areItemsTheSame(oldItem: IncomeRecordEntity, newItem: IncomeRecordEntity): Boolean {
                 return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: IncomeData, newItem: IncomeData): Boolean {
+            override fun areContentsTheSame(oldItem: IncomeRecordEntity, newItem: IncomeRecordEntity): Boolean {
                 return oldItem == newItem
             }
         }
